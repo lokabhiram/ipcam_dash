@@ -4,9 +4,15 @@ from deepface import DeepFace
 
 app = Flask(__name__)
 
-# Initialize the IP camera
-ip_camera_url = 'http://192.168.1.121:<port>/video'
-cap = cv2.VideoCapture(ip_camera_url)
+username = 'admin'
+password = 'Scrc@1234'
+cameraip = '192.168.1.121'  # Replace with your camera's IP address
+port = '554'  # Common ports are 554 for RTSP or 80 for HTTP
+
+# Construct the URL for the camera stream
+url = f'rtsp://{username}:{password}@{cameraip}:{port}/cam/realmonitor?channel=1&subtype=0'
+
+cap = cv2.VideoCapture(url)
 
 def gen_frames():
     print("Starting video stream...")
